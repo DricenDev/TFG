@@ -1,0 +1,32 @@
+# Dockerfile for Alice
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    graphviz \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir \
+    qiskit \
+    # qiskit-ibm-provider \
+    # qiskit-aer \
+    matplotlib \
+    pylatexenc
+    # seaborn
+
+RUN echo 'PS1="\`if [ \$? = 0 ]; then echo \[\e[32m\]\|^_^\|\[\e[0m\]; else echo \[\e[31m\]\|O_O\|\[\e[0m\]; fi\`${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> ~/.bashrc && \
+    echo "alias ll='(ls -alF --color=always | grep --color=never /$ || true) && (ls -alF --color=always | grep --color=never -v /$ | grep --color=never -v total || true)'" >> ~/.bashrc
+
+COPY ./loop.py ./loop.py
+COPY ./alice.py ./alice.py
+
+# Expose ports for inter-container communication
+EXPOSE 61000
+
+CMD ["python", "loop.py"]

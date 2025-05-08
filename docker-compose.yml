@@ -1,0 +1,36 @@
+services:
+  bit_commitment_alice:
+    build:
+      context: ./BitCommitment
+      dockerfile: Dockerfile.Alice
+    container_name: bit_commitment_alice
+
+  bit_commitment_bob:
+    build:
+      context: ./BitCommitment
+      dockerfile: Dockerfile.Bob
+    container_name: bit_commitment_bob
+
+  coin_flip_alice:
+    build:
+      context: ./CoinFlip
+      dockerfile: Dockerfile.Alice
+    container_name: coin_flip_alice
+
+  coin_flip_bob:
+    build:
+      context: ./CoinFlip
+      dockerfile: Dockerfile.Bob
+    container_name: coin_flip_bob
+
+  oblibious_transfer_alice:
+    build:
+      context: ./ObliviousTransfer
+      dockerfile: Dockerfile.Alice
+    container_name: oblibious_transfer_alice
+
+  oblibious_transfer_bob:
+    build:
+      context: ./ObliviousTransfer
+      dockerfile: Dockerfile.Bob
+    container_name: oblibious_transfer_bob
