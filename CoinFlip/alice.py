@@ -6,7 +6,8 @@ from qiskit.quantum_info             import Statevector
 
 import random
 import json
-import socket
+import socketii
+import time
 
 # Constants
 NUM_QUBITS = 20
@@ -35,9 +36,10 @@ for i in range(NUM_QUBITS):
             qc_array[i].h(0)
 
 # Step 4: Send qubits to Bob
+time.sleep(5)  # Ensure Bob is ready to receive
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect(('coin_flip_bob', 61000))
-    data_to_send = [Statevector(qc).data for qc in qc_array]
+    data_to_send = [Statevector(qc).data.tolist() for qc in qc_array]
     data_to_send = json.dumps(data_to_send).encode('utf-8')
     s.sendall(data_to_send)
 
@@ -51,12 +53,14 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         bob_base = json.loads(data.decode('utf-8'))
 
 # Step 6: Send Bob the base
+time.sleep(5)  # Ensure Bob is ready to receive
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect(('coin_flip_bob', 61000))
     data_to_send = json.dumps(bob_base).encode('utf-8')
     s.sendall(data_to_send)
 
 # Step 7: Send Bob the bits
+time.sleep(5)  # Ensure Bob is ready to receive
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect(('coin_flip_bob', 61000))
     data_to_send = json.dumps(bit_array).encode('utf-8')

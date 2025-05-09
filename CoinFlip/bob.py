@@ -7,6 +7,8 @@ from qiskit.quantum_info             import Statevector
 import random
 import json
 import socket
+import time
+import numpy as np
 
 # Constants
 NUM_QUBITS = 20
@@ -24,7 +26,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with conn:
         data = conn.recv(1024)
         qc_array = json.loads(data.decode('utf-8'))
-        qc_array = [QuantumCircuit(1, 1).from_dict(qc) for qc in qc_array]
+        qc_array = [QuantumCircuit(1, 1).from_dict(np.array(qc)) for qc in qc_array]
 
 # Step 3: Measure qubits
 for i in range(NUM_QUBITS):
@@ -40,6 +42,7 @@ print("Bob's guess base:")
 print(base)
 
 # Step 5: Send Alice the base
+time.sleep(5)  # Ensure Alice is ready to receive
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect(('coin_flip_alice', 61000))
     data_to_send = json.dumps(base).encode('utf-8')
