@@ -1,7 +1,8 @@
 # Quantum Cryptographic Primitives
 
 This repository contains implementations of quantum cryptographic primitives over BB84 using Qiskit.  
-The following primitives are implemented:
+To execute it all you need is to have installed [docker](https://www.docker.com/) on your machine.  
+The following primitives are implemented:  
 - Bit Commitment
 - Coin Flip
 - Oblivious Transfer
