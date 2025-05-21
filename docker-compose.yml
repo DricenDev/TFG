@@ -1,36 +1,70 @@
 services:
   bit_commitment_alice:
-    build:
-      context: ./BitCommitment
-      dockerfile: Dockerfile.Alice
     container_name: bit_commitment_alice
+    networks: [bit_commitment_net]
+    build:
+      context: .
+      dockerfile: bit_commitment/Dockerfile.Alice
 
   bit_commitment_bob:
-    build:
-      context: ./BitCommitment
-      dockerfile: Dockerfile.Bob
     container_name: bit_commitment_bob
+    networks: [bit_commitment_net]
+    build:
+      context: .
+      dockerfile: bit_commitment/Dockerfile.Bob
+
+
 
   coin_flip_alice:
-    build:
-      context: ./CoinFlip
-      dockerfile: Dockerfile.Alice
     container_name: coin_flip_alice
+    networks: [coin_flip_net]
+    build:
+      context: .
+      dockerfile: coin_flip/Dockerfile.Alice
 
   coin_flip_bob:
-    build:
-      context: ./CoinFlip
-      dockerfile: Dockerfile.Bob
     container_name: coin_flip_bob
+    networks: [coin_flip_net]
+    build:
+      context: .
+      dockerfile: coin_flip/Dockerfile.Bob
+
+
 
   oblibious_transfer_alice:
-    build:
-      context: ./ObliviousTransfer
-      dockerfile: Dockerfile.Alice
     container_name: oblibious_transfer_alice
+    networks: [oblibious_transfer_net]
+    build:
+      context: .
+      dockerfile: oblibious_transfer/Dockerfile.Alice
 
   oblibious_transfer_bob:
-    build:
-      context: ./ObliviousTransfer
-      dockerfile: Dockerfile.Bob
     container_name: oblibious_transfer_bob
+    networks: [oblibious_transfer_net]
+    build:
+      context: .
+      dockerfile: oblibious_transfer/Dockerfile.Bob
+
+
+
+  template_alice:
+    container_name: template_alice
+    networks: [template_net]
+    build:
+      context: .
+      dockerfile: template/Dockerfile.Alice
+
+  template_bob:
+    container_name: template_bob
+    networks: [template_net]
+    build:
+      context: .
+      dockerfile: template/Dockerfile.Bob
+
+
+
+networks:
+  bit_commitment_net:
+  coin_flip_net:
+  oblibious_transfer_net:
+  template_net:
