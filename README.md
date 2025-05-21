@@ -1,7 +1,6 @@
 # Quantum Cryptographic Primitives
 
-This repository contains implementations of quantum cryptographic primitives over BB84 using Qiskit.
-
+This repository contains implementations of quantum cryptographic primitives over BB84 using Qiskit.  
 The following primitives are implemented:
 - Bit Commitment
 - Coin Flip
@@ -19,13 +18,13 @@ docker-compose up --build -d coin_flip_alice coin_flip_bob
 docker exec -it coin_flip_alice bash
 ```
 
-**Once inside the container, to start the communication use:**
-***(Make sure to start first the Bob container, since that one is the first to receive data and needs to be listening)***
-``` bash
-run
-```
-
 **You can stop the containers using:**
 ``` bash
 docker-compose down
+```
+
+**Once inside the container, to start the communication use:**  
+(Make sure to start the Bob container first, since that one is the first to receive data and needs to be listening)
+``` bash
+run
 ```
