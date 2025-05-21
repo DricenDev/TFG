@@ -1,8 +1,10 @@
-# Dockerfile for Bob
+# Dockerfile for Alice
 FROM python:3.11-slim
 
+# Set working directory
 WORKDIR /app
 
+# Update the system
 RUN apt-get update && apt-get install -y \
     build-essential \
     libglib2.0-0 \
@@ -12,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     graphviz \
     && rm -rf /var/lib/apt/lists/*
 
+# Install needed python libraries
 RUN pip install --no-cache-dir \
     qiskit
     # qiskit-ibm-provider \
@@ -19,17 +22,17 @@ RUN pip install --no-cache-dir \
     # matplotlib \
     # pylatexenc
 
+# Set nice prompt and aliases
 RUN echo 'PS1="\`if [ \$? = 0 ]; then echo \[\e[32m\]\|^_^\|\[\e[0m\]; else echo \[\e[31m\]\|O_O\|\[\e[0m\]; fi\`${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> ~/.bashrc && \
     echo "alias ll='(ls -alF --color=always | grep --color=never /$ || true) && (ls -alF --color=always | grep --color=never -v /$ | grep --color=never -v total || true)'" >> ~/.bashrc && \
-    echo "alias run='python bob.py'"
+    echo "alias run='python alice.py'" >> ~/.bashrc
 
-COPY ./loop.py \
-     ./bob.py \
-     ./communication.py \
-     ./quantum.py \
-     ./
+# Copy python code    
+COPY ./shared/                 ./shared/
+COPY ./bit_commitment/alice.py ./alice.py
 
 # Expose ports for inter-container communication
 EXPOSE 61000
 
-CMD ["python", "loop.py"]
+# Run the loop so the container stays running something
+CMD ["python", "./shared/loop.py"]

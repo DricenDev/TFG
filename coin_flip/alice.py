@@ -1,8 +1,8 @@
 import random
 import time
 
-from communication import send_data, receive_data
-from quantum       import run, QuantumCircuit, Statevector
+from shared.communication import send_data, receive_data
+from shared.quantum       import run, QuantumCircuit, Statevector
 
 # Constants
 NUM_QUBITS = 20
