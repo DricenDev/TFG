@@ -1,5 +1,6 @@
 import random
 import time
+import sys
 
 from shared.communication import send_data, receive_data
 from shared.quantum       import run, QuantumCircuit, Statevector
@@ -46,7 +47,7 @@ send_data(alice_base, 'coin_flip_bob', 61000)
 time.sleep(5)  # Ensure Bob is ready to receive
 send_data(bit_array, 'coin_flip_bob', 61000)
 
-# Step 8: You either won or not
+# Step 8: Say who won
 if alice_base == bob_base:
     print("Bob WON!")
 else:
