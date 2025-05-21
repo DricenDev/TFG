@@ -23,5 +23,5 @@ docker exec -it coin_flip_alice bash
 docker-compose down
 ```
 
-**Once inside the container, to start the communication use the command 'run'**  
+**Once inside the container, to start the communication use the command `run`**  
 (Make sure to start the Bob container first, since that one is the first to receive data and needs to be listening)
