@@ -3,7 +3,8 @@ import time
 import sys
 
 from shared.communication import send_data, receive_data
-from shared.quantum       import run, QuantumCircuit, Statevector
+from shared.communication import send_qubits, recieve_qubits
+from shared.quantum       import run, QuantumCircuit
 
 # Constants
 NUM_QUBITS = 20
@@ -14,10 +15,7 @@ print("Bob's bases:")
 print(base_array)
 
 # Step 2: Receive qubits from Alice
-state_vectors = receive_data('coin_flip_bob', 61000)
-qc_array = [QuantumCircuit(1, 1) for _ in range(NUM_QUBITS)]
-for qc, sv in zip(qc_array, state_vectors):
-    qc.initialize(sv, 0)
+qc_array = recieve_qubits('coin_flip_bob')
 
 # Step 3: Measure qubits
 for i in range(NUM_QUBITS):
@@ -37,13 +35,13 @@ print(bob_base)
 
 # Step 5: Send Alice the base
 time.sleep(3)  # Ensure Alice is ready to receive
-send_data(bob_base, 'coin_flip_alice', 61000)
+send_data(bob_base, 'coin_flip_alice')
 
 # Step 6: Receive Alice's base
-alice_base = receive_data('coin_flip_bob', 61000)
+alice_base = receive_data('coin_flip_bob')
 
 # Step 7: Receive Alice's bits
-alice_bits = receive_data('coin_flip_bob', 61000)
+alice_bits = receive_data('coin_flip_bob')
 
 # Step 8: Compare bits
 bit_are_not_the_same = False

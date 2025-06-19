@@ -19,3 +19,18 @@ def receive_data(who_recives, port=61000):
                 if not chunk: break
                 data += chunk
             return pickle.loads(data)
+
+
+from shared.quantum import QuantumCircuit, Statevector
+
+def send_qubits(circuit_array, who_recives, port=None):
+    if port is not None: send_data([Statevector(qc).data for qc in circuit_array], who_recives, port)
+    else:                send_data([Statevector(qc).data for qc in circuit_array], who_recives)
+
+def recieve_qubits(who_recives, port=None):
+    if port is not None: state_vectors = receive_data(who_recives, port)
+    else:                state_vectors = receive_data(who_recives)
+    qc_array = [QuantumCircuit(1, 1) for _ in range(len(state_vectors))]
+    for qc, sv in zip(qc_array, state_vectors):
+        qc.initialize(sv, 0)
+    return qc_array

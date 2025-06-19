@@ -3,7 +3,8 @@ import time
 import sys
 
 from shared.communication import send_data, receive_data
-from shared.quantum       import run, QuantumCircuit, Statevector
+from shared.communication import send_qubits, recieve_qubits
+from shared.quantum       import run, QuantumCircuit
 
 # Constants
 NUM_QUBITS = 20
@@ -33,19 +34,18 @@ for i in range(NUM_QUBITS):
 
 # Step 4: Send qubits to Bob
 time.sleep(3) # Ensure Bob is ready to receive
-state_vectors = [Statevector(qc).data for qc in qc_array]
-send_data(state_vectors, 'coin_flip_bob', 61000)
+send_qubits(qc_array, 'coin_flip_bob')
 
 # Step 5: Receive Bob's base
-bob_base = receive_data('coin_flip_alice', 61000)
+bob_base = receive_data('coin_flip_alice')
 
 # Step 6: Send Bob the base
 time.sleep(3) # Ensure Bob is ready to receive
-send_data(alice_base, 'coin_flip_bob', 61000)
+send_data(alice_base, 'coin_flip_bob')
 
 # Step 7: Send Bob the bits
 time.sleep(5)  # Ensure Bob is ready to receive
-send_data(bit_array, 'coin_flip_bob', 61000)
+send_data(bit_array, 'coin_flip_bob')
 
 # Step 8: Say who won
 if alice_base == bob_base:
