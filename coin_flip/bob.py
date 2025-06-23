@@ -1,16 +1,15 @@
 import random
-import time
 import sys
 
 from shared.communication import send_data, receive_data
 from shared.communication import send_qubits, recieve_qubits
-from shared.quantum       import run, QuantumCircuit
+from shared.quantum       import encode_qubits, measure_qubits
 
 # Constants
 NUM_QUBITS = 20
 
 # Step 1: Select random bases
-base_array = [random.choice(['Computational', 'Hadamard']) for _ in range(NUM_QUBITS)]
+base_array = [random.choice(['C', 'H']) for _ in range(NUM_QUBITS)]
 print("Bob's bases:")
 print(base_array)
 
@@ -19,22 +18,18 @@ qc_array = recieve_qubits('coin_flip_bob')
 
 # Step 3: Measure qubits
 for i in range(NUM_QUBITS):
-    if base_array[i] == 'Computational':
-        qc_array[i].measure(0, 0)
-    if base_array[i] == 'Hadamard':
+    if base_array[i] == 'H':
         qc_array[i].h(0)
-        qc_array[i].measure(0, 0)
-results = [run(qc) for qc in qc_array]
+results = measure_qubits(qc_array)
 print("Bob's bits:")
 print(results)
 
 # Step 4: Select random base
-bob_base = random.choice(['Computational', 'Hadamard'])
+bob_base = random.choice(['C', 'H'])
 print("Bob's guess base:")
 print(bob_base)
 
 # Step 5: Send Alice the base
-time.sleep(3)  # Ensure Alice is ready to receive
 send_data(bob_base, 'coin_flip_alice')
 
 # Step 6: Receive Alice's base

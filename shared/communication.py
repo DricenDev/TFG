@@ -1,7 +1,12 @@
 import socket
 import pickle
+import time
+
+def ensure_reciever_is_ready(seconds=1):
+    time.sleep(seconds)
 
 def send_data(what_is_sent, who_recives, port=61000):
+    ensure_reciever_is_ready()
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((who_recives, port))
         data_to_send = pickle.dumps(what_is_sent)
