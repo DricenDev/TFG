@@ -1,6 +1,6 @@
 import random
-import time
 import sys
 
 from shared.communication import send_data, receive_data
-from shared.quantum       import run, QuantumCircuit, Statevector
+from shared.communication import send_qubits, recieve_qubits
+from shared.quantum       import encode_qubits, measure_qubits
