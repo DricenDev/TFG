@@ -25,7 +25,7 @@ docker-compose down
 ```
 
 **Once inside the container, to start the communication use the command `run`**  
-(Make sure to start the Bob container first, since that one is the first to receive data and needs to be listening before Alice send the qubits)
+(Make sure to start Bob's container first, since that is the first to receive data and needs to be listening before Alice send the qubits)
 
 **Container names:**
 ```
