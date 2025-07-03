@@ -8,13 +8,13 @@ from shared.quantum       import encode_qubits, measure_qubits
 # Constants
 NUM_QUBITS = 20
 
-# Step 1: Select random bases
+# Step 1: Receive qubits from Alice
+qc_array = recieve_qubits('coin_flip_bob')
+
+# Step 2: Select random bases
 base_array = [random.choice(['C', 'H']) for _ in range(NUM_QUBITS)]
 print("Bob's bases:")
 print(base_array)
-
-# Step 2: Receive qubits from Alice
-qc_array = recieve_qubits('coin_flip_bob')
 
 # Step 3: Measure qubits
 for i in range(NUM_QUBITS):

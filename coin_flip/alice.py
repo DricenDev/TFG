@@ -8,15 +8,15 @@ from shared.quantum       import encode_qubits, measure_qubits
 # Constants
 NUM_QUBITS = 20
 
-# Step 1: Select a random base
-alice_base = random.choice(['C', 'H'])
-print("Alice's base:")
-print(alice_base)
-
-# Step 2: Select random bits
+# Step 1: Select random bits
 bit_array = [str(random.randint(0, 1)) for _ in range(NUM_QUBITS)]
 print("Alice's random bits:")
 print(bit_array)
+
+# Step 2: Select a random base
+alice_base = random.choice(['C', 'H'])
+print("Alice's base:")
+print(alice_base)
 
 # Step 3: Initialize each qubit
 qc_array = encode_qubits(bit_array, [alice_base]*NUM_QUBITS)
