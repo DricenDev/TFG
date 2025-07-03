@@ -44,19 +44,19 @@ send_data(base_array, 'oblibious_transfer_bob')
 group_a, group_b = receive_data('oblibious_transfer_alice')
 
 # Step 8: Send Bob the values for one group on the first half and for the other group on the second half
-dictionary = {}
+bits_dictionary = {}
 if random.choice([True, False]):
     for i in range(0, NUM_QUBITS//2):
         if i in group_a:
-            dictionary[i] = bit_array[i]
+            bits_dictionary[i] = bit_array[i]
     for i in range(NUM_QUBITS//2, NUM_QUBITS):
         if i in group_b:
-            dictionary[i] = bit_array[i]
+            bits_dictionary[i] = bit_array[i]
 else:
     for i in range(0, NUM_QUBITS//2):
         if i in group_b:
-            dictionary[i] = bit_array[i]
+            bits_dictionary[i] = bit_array[i]
     for i in range(NUM_QUBITS//2, NUM_QUBITS):
         if i in group_a:
-            dictionary[i] = bit_array[i]
-send_data(dictionary, 'oblibious_transfer_bob')
+            bits_dictionary[i] = bit_array[i]
+send_data(bits_dictionary, 'oblibious_transfer_bob')
