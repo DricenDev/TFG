@@ -28,8 +28,8 @@ RUN echo 'PS1="\`if [ \$? = 0 ]; then echo \[\e[32m\]\|^_^\|\[\e[0m\]; else echo
     echo "alias run='python bob.py'" >> ~/.bashrc
 
 # Copy python code    
-COPY ./shared/                   ./shared/
-COPY ./oblibious_transfer/bob.py ./bob.py
+COPY ./shared/                          ./shared/
+COPY ./oblibious_transfer_1_of_2/bob.py ./bob.py
 
 # Expose ports for inter-container communication
 EXPOSE 61000

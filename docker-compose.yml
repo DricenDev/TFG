@@ -36,14 +36,14 @@ services:
     networks: [oblibious_transfer_net]
     build:
       context: .
-      dockerfile: oblibious_transfer/Dockerfile.Alice
+      dockerfile: oblibious_transfer_1_of_2/Dockerfile.Alice
 
   oblibious_transfer_bob:
     container_name: oblibious_transfer_bob
     networks: [oblibious_transfer_net]
     build:
       context: .
-      dockerfile: oblibious_transfer/Dockerfile.Bob
+      dockerfile: oblibious_transfer_1_of_2/Dockerfile.Bob
 
 
 

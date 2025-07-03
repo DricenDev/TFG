@@ -28,8 +28,8 @@ RUN echo 'PS1="\`if [ \$? = 0 ]; then echo \[\e[32m\]\|^_^\|\[\e[0m\]; else echo
     echo "alias run='python alice.py'" >> ~/.bashrc
 
 # Copy python code    
-COPY ./shared/                     ./shared/
-COPY ./oblibious_transfer/alice.py ./alice.py
+COPY ./shared/                            ./shared/
+COPY ./oblibious_transfer_1_of_2/alice.py ./alice.py
 
 # Expose ports for inter-container communication
 EXPOSE 61000
